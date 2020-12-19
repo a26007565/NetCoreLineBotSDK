@@ -15,17 +15,17 @@ namespace NetCoreLineBotSDK.Sample.Controllers
     [ApiController]
     public class LineController : ControllerBase
     {
-        private readonly ILineMessageUtility lineMessageUtility;
-        public LineController(ILineMessageUtility _lineMessageUtility)
+        private readonly LineBotSampleApp app;
+
+        public LineController(LineBotSampleApp app)
         {
-            lineMessageUtility = _lineMessageUtility;
+            this.app = app;
         }
 
         [HttpPost]
         [LineVerifySignature]
         public async Task<IActionResult> Post(WebhookEvent request)
         {
-            var app = new LineBotSampleApp(lineMessageUtility);
             await app.RunAsync(request.events);
             return Ok();
         }
