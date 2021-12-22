@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.Options;
+using Microsoft.Extensions.Options;
 using NetCoreLineBotSDK.Interfaces;
 using NetCoreLineBotSDK.Models;
 using NetCoreLineBotSDK.Models.Message;
@@ -131,8 +131,7 @@ namespace NetCoreLineBotSDK.Utility
                 ContractResolver = new DefaultContractResolver
                 {
                     NamingStrategy = new CamelCaseNamingStrategy()
-                },
-                Formatting = Formatting.Indented
+                }
             });
 
             request.Content = new StringContent(postJson);
@@ -432,7 +431,7 @@ namespace NetCoreLineBotSDK.Utility
 
             var obj = new
             {
-                richMenuId = richMenuId
+                richMenuId
             };
 
             var postJson = JsonConvert.SerializeObject(obj, new JsonSerializerSettings
@@ -453,7 +452,7 @@ namespace NetCoreLineBotSDK.Utility
 
         #endregion
 
-        private byte[] GetImage(string url)
+        private static byte[] GetImage(string url)
         {
             var request = (HttpWebRequest) WebRequest.Create(url);
             var response = (HttpWebResponse) request.GetResponse();
@@ -470,7 +469,6 @@ namespace NetCoreLineBotSDK.Utility
             var postJson = JsonConvert.SerializeObject(req, new JsonSerializerSettings
             {
                 NullValueHandling = NullValueHandling.Ignore,
-                Formatting = Formatting.Indented,
                 ContractResolver = new CustomPropertyNamesContractResolver()
                 {
                     Case = IdentifierCase.Camel,
@@ -496,7 +494,6 @@ namespace NetCoreLineBotSDK.Utility
             var postJson = JsonConvert.SerializeObject(req, new JsonSerializerSettings
             {
                 NullValueHandling = NullValueHandling.Ignore,
-                Formatting = Formatting.Indented,
                 ContractResolver = new CustomPropertyNamesContractResolver()
                 {
                     Case = IdentifierCase.Camel,
